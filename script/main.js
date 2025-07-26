@@ -264,20 +264,3 @@ const animationTimeline = () => {
         "+=1"
     );
 }
-// Add this code to the end of your existing script/main.js file
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    const song = document.querySelector('.song'); // Selects your audio element
-
-    // Selects your new button by its ID that you added in index.html
-    const playMusicButton = document.querySelector('#playMusicBtn'); 
-
-    if (playMusicButton && song) {
-        playMusicButton.addEventListener('click', () => {
-            song.play().catch(error => {
-                console.error("Audio playback failed:", error);
-                // Optional: Add a visual indicator here if playback fails
-            });
-        });
-    }
-});
