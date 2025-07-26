@@ -270,3 +270,19 @@ const animationTimeline = () => {
         tl.restart();
     });
 }
+// Add this code to the end of your existing script/main.js file
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const song = document.querySelector('.song');
+    const sendButton = document.querySelector('.fake-btn'); // Selects the "Send" button
+
+    if (sendButton && song) {
+        sendButton.addEventListener('click', () => {
+            // Play the song when the "Send" button is clicked
+            song.play().catch(error => {
+                console.error("Audio playback failed:", error);
+                // You can add a visual indicator here if playback fails (e.g., show a message)
+            });
+        });
+    }
+});
