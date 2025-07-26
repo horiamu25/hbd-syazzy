@@ -270,23 +270,3 @@ const animationTimeline = () => {
         tl.restart();
     });
 }
-// Add this code to the end of your existing script/main.js file
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Select the audio element
-    const song = document.querySelector('.song');
-
-    // Select your new button by its ID
-    // Make sure the ID here matches the ID you gave your new button in index.html
-    const playMusicButton = document.querySelector('#playMusicBtn'); 
-
-    if (playMusicButton && song) {
-        playMusicButton.addEventListener('click', () => {
-            // Play the song when the new button is clicked
-            song.play().catch(error => {
-                console.error("Audio playback failed:", error);
-                // Optional: You can add a visual indicator here if playback fails
-            });
-        });
-    }
-});
