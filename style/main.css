@@ -290,3 +290,44 @@ body {
     font-weight: lighter;
   }
 }
+/* Styling for the new Play Music Button */
+#playMusicBtn {
+    /* Basic appearance */
+    display: block; /* Makes it take full width, good for centering */
+    margin: 20px auto; /* Centers the button horizontally with some top/bottom space */
+    padding: 12px 25px; /* Spacing inside the button */
+    
+    /* Colors */
+    background-color: #ff69b4; /* A nice pink color, like "hotpink" */
+    color: white; /* White text */
+    border: none; /* No default border */
+    border-radius: 8px; /* Slightly rounded corners */
+    
+    /* Text styling */
+    font-family: 'Poppins', sans-serif; /* Uses your existing font */
+    font-size: 1.1em; /* Slightly larger text */
+    font-weight: 600; /* Bolder text */
+    text-transform: uppercase; /* All caps */
+    
+    /* Smooth transitions for hover effects */
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    
+    /* Make it clear it's clickable */
+    cursor: pointer;
+    
+    /* Optional: Shadow for a bit of depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect */
+#playMusicBtn:hover {
+    background-color: #e05e9e; /* Slightly darker pink on hover */
+    transform: translateY(-2px); /* Lifts the button slightly */
+}
+
+/* Active (click) effect */
+#playMusicBtn:active {
+    background-color: #c94c8b; /* Even darker pink when clicked */
+    transform: translateY(0); /* Pushes the button back down */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller shadow when clicked */
+}
