@@ -1,21 +1,45 @@
+// Ensure song element is selected globally for access by SweetAlert
+const song = document.querySelector('.song');
+
 // trigger to play music in the background with sweetalert
 window.addEventListener('load', () => {
-    Swal.fire({
-        title: 'Do you want to play music in the background?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            document.querySelector('.song').play();
-            animationTimeline();
-        } else {
-            animationTimeline();
-        }
-    });
+    // Only show the pop-up if the song element exists
+    if (song) {
+        Swal.fire({
+            title: 'Do you want to play music in the background?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            allowOutsideClick: false, // Prevents closing by clicking outside
+            customClass: {
+                popup: 'my-swal-popup' // Optional: Add a custom class for styling the pop-up itself
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // User clicked "Yes", play the music
+                song.play().catch(error => {
+                    console.error("Audio playback failed:", error);
+                    // Inform the user if playback is blocked
+                    Swal.fire({
+                        title: "Oops!",
+                        text: "Could not play music automatically. Your browser might have blocked it.",
+                        icon: "error"
+                    });
+                });
+                animationTimeline(); // Start animation after music consent
+            } else {
+                // User clicked "No", proceed with animation without music
+                animationTimeline();
+            }
+        });
+    } else {
+        // If song element is not found, just start the animation
+        console.warn("Audio element with class 'song' not found. Music playback will not work.");
+        animationTimeline();
+    }
 });
 
 
@@ -25,13 +49,18 @@ const animationTimeline = () => {
     const textBoxChars = document.getElementsByClassName("hbd-chatbox")[0];
     const hbd = document.getElementsByClassName("wish-hbd")[0];
 
-    textBoxChars.innerHTML = `<span>${textBoxChars.innerHTML
-        .split("")
-        .join("</span><span>")}</span>`;
+    // Check if elements exist before trying to modify their innerHTML
+    if (textBoxChars) {
+        textBoxChars.innerHTML = `<span>${textBoxChars.innerHTML
+            .split("")
+            .join("</span><span>")}</span>`;
+    }
 
-    hbd.innerHTML = `<span>${hbd.innerHTML
-        .split("")
-        .join("</span><span>")}</span>`;
+    if (hbd) {
+        hbd.innerHTML = `<span>${hbd.innerHTML
+            .split("")
+            .join("</span><span>")}</span>`;
+    }
 
     const ideaTextTrans = {
         opacity: 0,
@@ -198,7 +227,7 @@ const animationTimeline = () => {
         },
         "-=2"
     )
-    .from(".hat", 0.5, {
+    .from(".hat", 0.5, { // This is the .hat target from your console error.
         x: -100,
         y: 350,
         rotation: -180,
@@ -209,7 +238,6 @@ const animationTimeline = () => {
         0.7, {
             opacity: 0,
             y: -50,
-            // scale: 0.3,
             rotation: 150,
             skewX: "30deg",
             ease: Elastic.easeOut.config(1, 0.5),
